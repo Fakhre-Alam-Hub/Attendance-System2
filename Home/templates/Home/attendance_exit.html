@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Attendance Exit{% endblock title %}
+
+{% block body %}
+<div class="container mt-3">
+    <div class="row mb-3" id="table_content">
+        <div class="media mt-3 col-md-7 themed-grid-col" style="display: flex;flex-direction: column;">
+            <div id="camera">
+                <img src="{% url 'home_exit_video_feed' %}" alt="sorry unable to open camera" id="video" width="600"
+                    height="500">
+            </div>
+            <div class="media-body">
+                <button class="btn btn-outline-success mt-3" onclick="goToExtractFeatures()">Extract Features</button>
+                <button class="btn btn-outline-success mt-3" onclick="goToHome()">Home</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    function goToRegister() {
+        location.replace("{% url 'account_register' %}")
+    }
+
+    function goToExtractFeatures() {
+        location.replace("{% url 'home_extract_features' %}")
+    }
+
+    function goToHome() {
+        location.replace("{% url 'home_index' %}")
+    }
+
+</script>
+
+{% endblock body %}

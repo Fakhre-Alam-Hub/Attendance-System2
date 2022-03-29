@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Attendance Entry{% endblock title %}
+
+{% block body %}
+
+<div class="container">
+
+
+  <div class="card" style="margin-top: 2em; margin-left: 2em; margin-right: 2em; margin-bottom: 2em;">
+    <div class="card-body">
+      <h2> Today's Statistics </h2>
+      <div class="row" style="margin-left: 12em">
+        <div class="card"
+          style="width: 20em; background-color: #338044; text-align : center; margin-left: 5em; margin-top: 5em; color: white;">
+          <div class="card-body">
+            <h5 class="card-title"> <b>Total Number Of Employees</b></h5>
+
+            <p class="card-text" style="padding-top: 1em; font-size: 28px;"> <b>{{total_num_of_emp }}</b></p>
+
+          </div>
+        </div>
+        <div class="card"
+          style="width: 20em; background-color: #80335b; text-align : center; margin-left: 5em; margin-top: 5em; color: white;">
+          <div class="card-body">
+            <h5 class="card-title"> <b> Employees present today</b></h5>
+
+            <p class="card-text" style="padding-top: 1em; font-size: 28px;"><b> {{emp_present_today }}</b></p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <h4 class="text-center"> Present Employee </h4>
+    <table class="table table-striped mt-4" id="myTable">
+      <thead>
+        <tr class="header">
+          <th>#</th>
+          <th>User ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Entry Time</th>
+          <!-- <th>Entry Date</th> -->
+          <th>Exit Time</th>
+          <!-- <th>Exit Date</th> -->
+          <!-- <th>Total Hours</th> -->
+        </tr>
+      </thead>
+
+      <tbody>
+        {% if row_count > 0 %}
+        {% for item, f, l in my_attendance_data %}
+        <tr>
+          <td>{{item.id}}</td>
+          <td>{{item.name}}</td>
+          <td>{{f}}</td>
+          <td>{{l}}</td>
+          <td>{{item.entry_time}}</td>
+          <!-- <td>{{item.entry_date}}</td> -->
+          <td>{{item.exit_time}}</td>
+          <!-- <td>{{item.exit_date}}</td> -->
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+          <td colspan="7">No data available</td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+
+
+
+<!-- <div class="card" style="margin-top: 2em; margin-left: 2em; margin-right: 2em; margin-bottom: 2em;">
+    <div class="card-body">
+
+
+
+      <div class="row">
+        <div class="col-md-6">
+          <h2> Last Week </h2>
+          <div class="card" style="width: 50em;">
+            <img class="card-img-top" src="{% static 'recognition/img/attendance_graphs/last_week/1.png'%}"
+              alt="Card image cap">
+            <div class="card-body">
+              <p class="card-text" style="text-align: center;">Number of employees present each day</p>
+            </div>
+          </div>
+
+
+
+
+
+        </div>
+        <div class="col-md-6">
+          <h2> This Week </h2>
+          <div class="card" style="width: 50em;">
+            <img class="card-img-top" src="{% static 'recognition/img/attendance_graphs/this_week/1.png'%}"
+              alt="Card image cap">
+            <div class="card-body">
+              <p class="card-text" style="text-align: center;">Number of employees present each day</p>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+
+
+{% endblock body %}

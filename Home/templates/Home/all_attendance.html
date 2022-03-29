@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}All Attendance{% endblock title %}
+
+{% block body %}
+
+<div class="container">
+
+    <div class="row mt-3">
+        <form method="GET">
+            {{attendancefilter.form.as_p}}
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+    </div>
+
+    <button class="btn btn-primary mt-3" onclick="goToGenerateReport()">Generate Report</button>
+    <button class="btn btn-primary mt-3" onclick="goToSendEmail()">Send Email</button>
+
+    <div class="row mt-3">
+        <table class="table table-striped mt-4" id="myTable">
+            <thead>
+                <tr class="header">
+                    <th>#</th>
+                    <th>User ID</th>
+                    <th>Entry Time</th>
+                    <th>Exit Time</th>
+                    <th>Total Hours</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% if row_count > 0 %}
+                    {% for item, hour in result %}
+                        {% if hour < work_hour %}
+                            <tr style="background-color: crimson;">
+                                <td>{{item.id}}</td>
+                                <td>{{item.name}}</td>
+                                <td>{{item.entry_time}}</td>
+                                <td>{{item.exit_time}}</td>
+                                <td>{{ hour }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td>{{item.id}}</td>
+                                <td>{{item.name}}</td>
+                                <td>{{item.entry_time}}</td>
+                                <td>{{item.exit_time}}</td>
+                                <td>{{ hour }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="7">No data available</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<script>
+    function goToGenerateReport() {
+        location.replace("{% url 'home_genearte_report' %}")
+    }
+    
+    function goToSendEmail() {
+        location.replace("{% url 'home_send_email' %}")
+    }
+</script>
+
+{% endblock body %}

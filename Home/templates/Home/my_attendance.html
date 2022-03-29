@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}My Attendance{% endblock title %}
+
+{% block body %}
+
+<div class="container">
+
+    <div class="row mt-3">
+        <table class="table table-striped mt-4" id="myTable">
+            <thead>
+                <tr class="header">
+                    <th>#</th>
+                    <th>User ID</th>
+                    <th>Entry Time</th>
+                    <th>Exit Time</th>
+                    <th>Total Hours</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% if row_count > 0 %}
+                    {% for item, hour in result %}
+                        {% if hour < work_hour %}
+                        <tr style="background-color: crimson;">
+                            <td>{{item.id}}</td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.entry_time}}</td>
+                            <td>{{item.exit_time}}</td>
+                            <td>{{ hour }}</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td>{{item.id}}</td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.entry_time}}</td>
+                            <td>{{item.exit_time}}</td>
+                            <td>{{ hour }}</td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td colspan="7">No data available</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card" style=" margin-top: 5em; margin-bottom: 10em;">
+        <div class="card-body">
+            <h4 style="text-align: center;">Present vs Absent Chart</h4></p>
+        </div>
+        <img class="card-img-top" style="height: 50%; width:50%;" src="{% static 'Home/img/attendance_graphs/employee_attendance_percent/1.png'%}"
+            alt="Card image cap">
+    </div>
+</div>
+
+{% endblock body %}

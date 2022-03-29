@@ -112,3 +112,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# settings.ini - this file contains all the passwords and other sensitive data
+settings.ini

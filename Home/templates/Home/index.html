@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 ">
+            <h1 style="text-align: center;">Welcome to Attendance Management System</h1>
+        </div>
+    </div>
+
+    <div class="border border-info mt-5" style="padding: 10px;">
+        <h4>Steps to be followed</h4>
+        <ol type="1">
+            <li>Register yourself, ignore if done</li>
+            <li>Login with your username and password</li>
+            <li>Upload your image in profile section</li>
+            <li>Click on Extract button</li>
+            <li>Go to attendance panel Entry or Exit, allow the browser to open webcam.</li>
+        </ol>
+    </div>
+    <div>
+        {% if user.is_superuser %}
+        <button class="btn btn-outline-success mt-3" onclick="goToRegister()">Register</button>
+        <button class="btn btn-outline-success mt-3" onclick="goToLogin()">Login</button>
+        <button class="btn btn-outline-success mt-3" onclick="goToExtractFeatures()">Extract Features</button>
+        <button class="btn btn-outline-success mt-3" onclick="goToAttendanceEntry()">Go to Attendance Entry Panel</button>
+        <button class="btn btn-outline-success mt-3" onclick="goToAttendanceExit()">Go to Attendance Exit Panel</button>
+        {% else %}
+        <button class="btn btn-outline-success mt-3" onclick="goToLogin()">Login</button>
+        <button class="btn btn-outline-success mt-3" onclick="goToAttendanceEntry()">Go to Attendance Entry Panel</button>
+        <button class="btn btn-outline-success mt-3" onclick="goToAttendanceExit()">Go to Attendance Exit Panel</button>
+        {% endif %}
+        
+    </div>
+</div>
+
+<script>
+    function goToProfile() {
+        location.replace("{% url 'account_profile' %}")
+    }
+
+    function goToRegister() {
+        location.replace("{% url 'account_register' %}")
+    }
+
+    function goToLogin() {
+        location.replace("{% url 'account_login' %}")
+    }
+
+    function goToAttendanceEntry() {
+        location.replace("{% url 'home_attendance_entry' %}")
+    }
+    
+    function goToAttendanceExit() {
+        location.replace("{% url 'home_attendance_exit' %}")
+    }
+
+    function openCamera() {
+        location.replace("{% url 'home_entry_video_feed' %}")
+    }
+
+    function goToExtractFeatures() {
+        location.replace("{% url 'home_extract_features' %}")
+    }
+
+</script>
+{% endblock body %}
